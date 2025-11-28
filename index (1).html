@@ -1,0 +1,1692 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hanzz41 STORE -  Digital Products</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1f36;
+            --secondary: #2d3748;
+            --accent: #4a90e2;
+            --accent-glow: rgba(74, 144, 226, 0.5);
+            --text-light: #f7fafc;
+            --text-muted: #a0aec0;
+            --success: #48bb78;
+            --warning: #ed8936;
+            --card-bg: linear-gradient(135deg, rgba(26, 31, 54, 0.9) 0%, rgba(45, 55, 72, 0.9) 100%);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.15);
+            --shadow-deep: 0 10px 40px rgba(0, 0, 0, 0.3);
+            --shadow-glow: 0 0 20px var(--accent-glow);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('https://files.catbox.moe/9bg7ox.jpg') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(13, 27, 42, 0.85) 0%, rgba(26, 31, 54, 0.9) 100%);
+            z-index: -1;
+        }
+
+        /* Enhanced Loader */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .loader-content {
+            text-align: center;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .loader-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(74, 144, 226, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        .loader-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .loader-spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid var(--accent);
+            border-radius: 50%;
+            animation: spin 1.2s linear infinite;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+
+        .loader-spinner::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top: 2px solid rgba(74, 144, 226, 0.3);
+            animation: spin 1.5s linear infinite;
+        }
+
+        .loader-text {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #fff, var(--accent), #fff);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s infinite linear;
+            letter-spacing: 1px;
+        }
+
+        .loader-subtext {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 10px;
+            font-weight: 300;
+        }
+
+        .enter-btn {
+            background: linear-gradient(135deg, var(--accent) 0%, #357abd 100%);
+            border: none;
+            padding: 12px 30px;
+            border-radius: var(--radius-sm);
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s ease-out 1.5s forwards;
+        }
+
+        .enter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .enter-btn:hover::before {
+            left: 100%;
+        }
+
+        .enter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(74, 144, 226, 0.5); }
+            50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(74, 144, 226, 0.7); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Main Container */
+        .main-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 80px; /* Space for bottom navigation */
+            display: none;
+        }
+
+        /* Container & Card */
+        .container {
+            max-width: 480px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-deep), 0 0 0 1px var(--card-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(74, 144, 226, 0.1) 0%, rgba(74, 144, 226, 0) 70%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: var(--radius-lg);
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft), var(--shadow-glow);
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+            pointer-events: none;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-deep), 0 0 25px var(--accent-glow);
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .header h1 {
+            color: var(--text-light);
+            font-size: 32px;
+            margin-bottom: 8px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            gap: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .product-card {
+            background: linear-gradient(135deg, rgba(26, 31, 54, 0.8) 0%, rgba(45, 55, 72, 0.8) 100%);
+            border-radius: var(--radius-md);
+            padding: 25px;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transition: left 0.6s;
+        }
+
+        .product-card:hover::before {
+            left: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-deep), 0 0 15px rgba(74, 144, 226, 0.3);
+        }
+
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .product-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+
+        .product-price {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--accent);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-description {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .product-benefits {
+            margin-top: 15px;
+        }
+
+        .benefit-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+
+        .benefit-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .benefit-item {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 18px;
+        }
+
+        .benefit-item::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        /* Payment Methods */
+        .payment-methods {
+            display: grid;
+            gap: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .payment-btn {
+            background: linear-gradient(135deg, rgba(26, 31, 54, 0.8) 0%, rgba(45, 55, 72, 0.8) 100%);
+            border: none;
+            padding: 18px 24px;
+            border-radius: var(--radius-md);
+            color: var(--text-light);
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            backdrop-filter: blur(5px);
+        }
+
+        .payment-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .payment-btn:hover::before {
+            left: 100%;
+        }
+
+        .payment-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-deep), 0 0 15px rgba(74, 144, 226, 0.3);
+        }
+
+        .payment-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .payment-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .payment-btn:hover .payment-icon {
+            transform: scale(1.05);
+        }
+
+        .payment-icon img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .payment-status {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: auto;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+        }
+
+        .status-available {
+            background-color: var(--success);
+            color: white;
+            box-shadow: 0 2px 8px rgba(72, 187, 120, 0.3);
+        }
+
+        .status-unavailable {
+            background-color: var(--warning);
+            color: white;
+            box-shadow: 0 2px 8px rgba(237, 137, 54, 0.3);
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 20px;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+            border-top: 1px solid var(--card-border);
+            z-index: 100;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            padding: 10px 15px;
+            border-radius: var(--radius-sm);
+            flex: 1;
+            max-width: 150px;
+        }
+
+        .nav-btn i {
+            font-size: 20px;
+        }
+
+        .nav-btn.active {
+            color: var(--accent);
+            background: rgba(74, 144, 226, 0.1);
+        }
+
+        .nav-btn:hover:not(.active) {
+            color: var(--text-light);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 27, 42, 0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            animation: modalFadeIn 0.3s ease-out;
+            backdrop-filter: blur(5px);
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            animation: modalScaleIn 0.3s ease-out;
+            position: relative;
+            box-shadow: var(--shadow-deep), 0 0 0 1px var(--card-border);
+            overflow: hidden;
+        }
+
+        .modal-content::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: var(--radius-lg);
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        @keyframes modalScaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            font-size: 24px;
+            color: var(--text-light);
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .modal-header {
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .modal-header h2 {
+            color: var(--text-light);
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .payment-info {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: var(--radius-md);
+            margin: 20px 0;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            z-index: 2;
+        }
+
+        .payment-number {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-light);
+            margin: 15px 0;
+            letter-spacing: 1px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-family: 'Courier New', monospace;
+        }
+
+        .qris-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--radius-md);
+            margin: 20px 0;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .copy-btn {
+            background: linear-gradient(135deg, var(--accent) 0%, #357abd 100%);
+            border: none;
+            padding: 12px 30px;
+            border-radius: var(--radius-sm);
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 15px;
+            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .copy-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .copy-btn:hover::before {
+            left: 100%;
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
+        }
+
+        .unavailable-message {
+            color: var(--warning);
+            font-size: 18px;
+            margin: 20px 0;
+            font-weight: 500;
+        }
+
+        .info-text {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-top: 15px;
+            line-height: 1.5;
+        }
+
+        /* Buy Modal */
+        .buy-options {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        .buy-option {
+            flex: 1;
+            max-width: 150px;
+            background: linear-gradient(135deg, var(--accent) 0%, #357abd 100%);
+            border: none;
+            padding: 15px;
+            border-radius: var(--radius-sm);
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+        }
+
+        .buy-option.whatsapp {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .buy-option.telegram {
+            background: linear-gradient(135deg, #0088cc 0%, #005580 100%);
+            box-shadow: 0 4px 15px rgba(0, 136, 204, 0.3);
+        }
+
+        .buy-option:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
+        }
+
+        .buy-option.whatsapp:hover {
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .buy-option.telegram:hover {
+            box-shadow: 0 6px 20px rgba(0, 136, 204, 0.4);
+        }
+
+        .buy-option i {
+            font-size: 24px;
+        }
+
+        /* Product Detail */
+        .product-detail {
+            display: none;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--text-light);
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 10px 20px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .detail-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+
+        .detail-price {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--accent);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .detail-description {
+            color: var(--text-muted);
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .detail-benefits {
+            margin-top: 25px;
+        }
+
+        .detail-benefit-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .detail-benefit-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .detail-benefit-item {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .detail-benefit-item::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .buy-btn {
+            background: linear-gradient(135deg, var(--accent) 0%, #357abd 100%);
+            border: none;
+            padding: 16px 40px;
+            border-radius: var(--radius-sm);
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 30px;
+            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .buy-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .buy-btn:hover::before {
+            left: 100%;
+        }
+
+        .buy-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
+        }
+
+        /* Music Player */
+        .music-player {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(26, 31, 54, 0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 99;
+            transition: var(--transition);
+            display: none;
+        }
+
+        .music-player:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-deep);
+        }
+
+        .music-player i {
+            font-size: 20px;
+            color: var(--text-light);
+        }
+
+        .music-player.playing i {
+            color: var(--accent);
+        }
+
+        /* Page Sections */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .card {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 26px;
+            }
+
+            .payment-btn {
+                font-size: 15px;
+                padding: 16px 20px;
+            }
+
+            .modal-content {
+                padding: 30px 20px;
+            }
+            
+            .payment-number {
+                font-size: 20px;
+            }
+
+            .product-title {
+                font-size: 18px;
+            }
+
+            .product-price {
+                font-size: 20px;
+            }
+
+            .detail-title {
+                font-size: 24px;
+            }
+
+            .detail-price {
+                font-size: 28px;
+            }
+
+            .buy-options {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .buy-option {
+                max-width: 100%;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .container {
+                max-width: 100%;
+            }
+            
+            .card {
+                padding: 25px 15px;
+            }
+            
+            .payment-btn {
+                padding: 14px 16px;
+            }
+            
+            .payment-icon {
+                width: 38px;
+                height: 38px;
+            }
+
+            .bottom-nav {
+                padding: 10px 15px;
+            }
+
+            .nav-btn {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+
+            .nav-btn i {
+                font-size: 18px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Music Player -->
+    <div class="music-player" id="musicPlayer">
+        <i class="fas fa-play"></i>
+        <audio id="backgroundMusic" loop>
+            <source src="https://files.catbox.moe/your-music-url.mp3" type="audio/mpeg">
+            Browser Anda tidak mendukung elemen audio.
+        </audio>
+    </div>
+
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-logo">
+                <img src="https://files.catbox.moe/kivbxm.jpg" alt="Hanzz41 STORE">
+            </div>
+            <div class="loader-spinner"></div>
+            <div class="loader-text">Hanzz41 STORE</div>
+            <div class="loader-subtext">Premium Digital Products</div>
+            <button class="enter-btn" id="enterBtn" onclick="enterWebsite()">Masuk ke Produk</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container" id="mainContent">
+        <!-- Products Page -->
+        <div class="page active" id="productsPage">
+            <div class="container">
+                <div class="card">
+                    <div class="header">
+                        <div class="logo">
+                            <img src="https://files.catbox.moe/kivbxm.jpg" alt="Hanzz41 STORE">
+                        </div>
+                        <h1>Hanzz41 STORE</h1>
+                        <p>Produk Digital Premium</p>
+                    </div>
+
+                    <div class="products-grid">
+                        <div class="product-card" onclick="openProductDetail('pt-jasteb')">
+                            <div class="product-header">
+                                <div class="product-title">PT JASTEB</div>
+                                <div class="product-price">Rp 5.000</div>
+                            </div>
+                            <div class="product-description">
+                                Akses panel JASTEB untuk berbagai keperluan digital
+                            </div>
+                            <div class="product-benefits">
+                                <div class="benefit-title">Keuntungan:</div>
+                                <ul class="benefit-list">
+                                    <li class="benefit-item">Bisa OPEN JASTEB</li>
+                                    <li class="benefit-item">Bisa OPEN UNCHEK</li>
+                                    <li class="benefit-item">Bisa CEK² SENDIRI</li>
+                                    <li class="benefit-item">Dapat Panel JASTEB</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="product-card" onclick="openProductDetail('team-jasteb')">
+                            <div class="product-header">
+                                <div class="product-title">TEAM JASTEB</div>
+                                <div class="product-price">Rp 10.000</div>
+                            </div>
+                            <div class="product-description">
+                                Akses lengkap untuk membuat dan mengelola panel JASTEB
+                            </div>
+                            <div class="product-benefits">
+                                <div class="benefit-title">Keuntungan:</div>
+                                <ul class="benefit-list">
+                                    <li class="benefit-item">Akses CREATE PANEL & ADD PUSAT</li>
+                                    <li class="benefit-item">Bisa OPEN PT JASTEB</li>
+                                    <li class="benefit-item">Bisa OPEN JASTEB/UNCHEK</li>
+                                    <li class="benefit-item">Bisa CREATE PANEL SESUKA HATI</li>
+                                    <li class="benefit-item">Bisa JUAL PANEL JASTEB</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="product-card" onclick="openProductDetail('marga-jasteb')">
+                            <div class="product-header">
+                                <div class="product-title">MARGA JASTEB</div>
+                                <div class="product-price">Rp 25.000</div>
+                            </div>
+                            <div class="product-description">
+                                pakey premium dengan akses lebih luas dan fitur admin
+                            </div>
+                            <div class="product-benefits">
+                                <div class="benefit-title">Keuntungan:</div>
+                                <ul class="benefit-list">
+                                    <li class="benefit-item">Bisa OPEN TEAM JASTEB</li>
+                                    <li class="benefit-item">Bisa OPEN PT JASTEB</li>
+                                    <li class="benefit-item">Dapat 2 Akses CREATE PANEL & ADD PUSAT</li>
+                                    <li class="benefit-item">Bisa JUALAN PANEL</li>
+                                    <li class="benefit-item">Bisa BALMOD TANPA NEBAR</li>
+                                    <li class="benefit-item">Admin di 1 GB Ladang JASTEB</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="product-card" onclick="openProductDetail('founder-jasteb')">
+                            <div class="product-header">
+                                <div class="product-title">FOUNDER JASTEB</div>
+                                <div class="product-price">Rp 60.000</div>
+                            </div>
+                            <div class="product-description">
+                                paket founder dengan akses penuh dan hak istimewa
+                            </div>
+                            <div class="product-benefits">
+                                <div class="benefit-title">Keuntungan:</div>
+                                <ul class="benefit-list">
+                                    <li class="benefit-item">Dapat 3 Akses CREATE PANEL & ADD PUSAT</li>
+                                    <li class="benefit-item">Bisa OPEN MARGA JASTEB</li>
+                                    <li class="benefit-item">Bisa OPEN TEAM JASTEB</li>
+                                    <li class="benefit-item">Bisa OPEN PT JASTEB</li>
+                                    <li class="benefit-item">Admin di 3 GB Ladang JASTEB</li>
+                                    <li class="benefit-item">Admin di Saluran JASTEB</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="product-card" onclick="openProductDetail('team-pribadi')">
+                            <div class="product-header">
+                                <div class="product-title">TEAM PRIBADI</div>
+                                <div class="product-price">Rp 140.000</div>
+                            </div>
+                            <div class="product-description">
+                                Paket gacor dengan semua benefit dan jaminan balmod
+                            </div>
+                            <div class="product-benefits">
+                                <div class="benefit-title">Keuntungan:</div>
+                                <ul class="benefit-list">
+                                    <li class="benefit-item">Bisa OPEN ALL BENEFIT DI ATAS</li>
+                                    <li class="benefit-item">Admin di Semua GB Ladang JASTEB</li>
+                                    <li class="benefit-item">Dapat WHM MINI</li>
+                                    <li class="benefit-item">Dapat SMTP MINI</li>
+                                    <li class="benefit-item">Dapat IMPLUSE (Kalo Ada)</li>
+                                    <li class="benefit-item">JAMIN BALMOD</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Page -->
+        <div class="page" id="paymentPage">
+            <div class="container">
+                <div class="card">
+                    <div class="header">
+                        <div class="logo">
+                            <img src="https://files.catbox.moe/kivbxm.jpg" alt="Hanzz41 STORE">
+                        </div>
+                        <h1>Hanzz41 STORE</h1>
+                        <p>Pilih Metode Pembayaran</p>
+                    </div>
+
+                    <div class="payment-methods">
+                        <button class="payment-btn" onclick="openModal('dana')">
+                            <div class="payment-icon">
+                                <img src="https://files.catbox.moe/exdsmx.jpg" alt="DANA">
+                            </div>
+                            <span>DANA</span>
+                            <span class="payment-status status-available">Tersedia</span>
+                        </button>
+
+                        <button class="payment-btn" onclick="openModal('qris')">
+                            <div class="payment-icon">
+                                <img src="https://files.catbox.moe/1y805e.jpg" alt="QRIS">
+                            </div>
+                            <span>QRIS</span>
+                            <span class="payment-status status-available">Tersedia</span>
+                        </button>
+
+                        <button class="payment-btn" onclick="openModal('gopay')">
+                            <div class="payment-icon">
+                                <img src="https://files.catbox.moe/vp9ldi.jpg" alt="GoPay">
+                            </div>
+                            <span>GoPay</span>
+                            <span class="payment-status status-available">Tersedia</span>
+                        </button>
+
+                        <button class="payment-btn" onclick="openModal('ovo')">
+                            <div class="payment-icon">
+                                <img src="https://files.catbox.moe/mga3vs.jpg" alt="OVO">
+                            </div>
+                            <span>OVO</span>
+                            <span class="payment-status status-unavailable">Segera Hadir</span>
+                        </button>
+
+                        <button class="payment-btn" onclick="openModal('shopee')">
+                            <div class="payment-icon">
+                                <img src="https://files.catbox.moe/icibpw.jpg" alt="ShopeePay">
+                            </div>
+                            <span>ShopeePay</span>
+                            <span class="payment-status status-unavailable">Segera Hadir</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Detail Pages -->
+        <div class="product-detail" id="pt-jasteb-detail">
+            <div class="container">
+                <div class="card">
+                    <button class="back-btn" onclick="closeProductDetail('pt-jasteb')">
+                        <i class="fas fa-arrow-left"></i> Kembali
+                    </button>
+                    <div class="detail-header">
+                        <div class="detail-title">PT JASTEB</div>
+                        <div class="detail-price">Rp 5.000</div>
+                    </div>
+                    <div class="detail-description">
+                        Akses panel JASTEB untuk berbagai keperluan digital. Dapatkan kemampuan untuk membuka JASTEB, unchek, dan melakukan pengecekan sendiri.
+                    </div>
+                    <div class="detail-benefits">
+                        <div class="detail-benefit-title">Keuntungan Bergabung:</div>
+                        <ul class="detail-benefit-list">
+                            <li class="detail-benefit-item">Bisa OPEN JASTEB</li>
+                            <li class="detail-benefit-item">Bisa OPEN UNCHEK</li>
+                            <li class="detail-benefit-item">Bisa CEK² SENDIRI</li>
+                            <li class="detail-benefit-item">Dapat Panel JASTEB</li>
+                        </ul>
+                    </div>
+                    <button class="buy-btn" onclick="openBuyModal('PT JASTEB')">BELI SEKARANG</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-detail" id="team-jasteb-detail">
+            <div class="container">
+                <div class="card">
+                    <button class="back-btn" onclick="closeProductDetail('team-jasteb')">
+                        <i class="fas fa-arrow-left"></i> Kembali
+                    </button>
+                    <div class="detail-header">
+                        <div class="detail-title">TEAM JASTEB</div>
+                        <div class="detail-price">Rp 10.000</div>
+                    </div>
+                    <div class="detail-description">
+                        Akses lengkap untuk membuat dan mengelola panel JASTEB. Dapatkan kemampuan untuk membuat panel sesuai keinginan dan menjual panel JASTEB.
+                    </div>
+                    <div class="detail-benefits">
+                        <div class="detail-benefit-title">Keuntungan Bergabung:</div>
+                        <ul class="detail-benefit-list">
+                            <li class="detail-benefit-item">Dapat Akses CREATE PANEL & ADD PUSAT</li>
+                            <li class="detail-benefit-item">Bisa OPEN PT JASTEB</li>
+                            <li class="detail-benefit-item">Bisa OPEN JASTEB/UNCHEK</li>
+                            <li class="detail-benefit-item">Bisa CREATE PANEL SESUKA HATI</li>
+                            <li class="detail-benefit-item">Bisa JUAL PANEL JASTEB</li>
+                        </ul>
+                    </div>
+                    <button class="buy-btn" onclick="openBuyModal('TEAM JASTEB')">BELI SEKARANG</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-detail" id="marga-jasteb-detail">
+            <div class="container">
+                <div class="card">
+                    <button class="back-btn" onclick="closeProductDetail('marga-jasteb')">
+                        <i class="fas fa-arrow-left"></i> Kembali
+                    </button>
+                    <div class="detail-header">
+                        <div class="detail-title">MARGA JASTEB</div>
+                        <div class="detail-price">Rp 25.000</div>
+                    </div>
+                    <div class="detail-description">
+                        paket premium dengan akses lebih luas dan fitur admin. Dapatkan hak istimewa sebagai admin di grup ladang JASTEB.
+                    </div>
+                    <div class="detail-benefits">
+                        <div class="detail-benefit-title">Keuntungan Bergabung:</div>
+                        <ul class="detail-benefit-list">
+                            <li class="detail-benefit-item">Bisa OPEN TEAM JASTEB</li>
+                            <li class="detail-benefit-item">Bisa OPEN PT JASTEB</li>
+                            <li class="detail-benefit-item">Dapat 2 Akses CREATE PANEL & ADD PUSAT</li>
+                            <li class="detail-benefit-item">Bisa JUALAN PANEL</li>
+                            <li class="detail-benefit-item">Bisa BALMOD TANPA NEBAR</li>
+                            <li class="detail-benefit-item">Admin di 1 GB Ladang JASTEB</li>
+                        </ul>
+                    </div>
+                    <button class="buy-btn" onclick="openBuyModal('MARGA JASTEB')">BELI SEKARANG</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-detail" id="founder-jasteb-detail">
+            <div class="container">
+                <div class="card">
+                    <button class="back-btn" onclick="closeProductDetail('founder-jasteb')">
+                        <i class="fas fa-arrow-left"></i> Kembali
+                    </button>
+                    <div class="detail-header">
+                        <div class="detail-title">FOUNDER JASTEB</div>
+                        <div class="detail-price">Rp 60.000</div>
+                    </div>
+                    <div class="detail-description">
+                        Paket founder dengan akses penuh dan hak istimewa. Dapatkan akses admin di 3 grup ladang JASTEB dan saluran JASTEB.
+                    </div>
+                    <div class="detail-benefits">
+                        <div class="detail-benefit-title">Keuntungan Bergabung:</div>
+                        <ul class="detail-benefit-list">
+                            <li class="detail-benefit-item">Dapat 3 Akses CREATE PANEL & ADD PUSAT</li>
+                            <li class="detail-benefit-item">Bisa OPEN MARGA JASTEB</li>
+                            <li class="detail-benefit-item">Bisa OPEN TEAM JASTEB</li>
+                            <li class="detail-benefit-item">Bisa OPEN PT JASTEB</li>
+                            <li class="detail-benefit-item">Admin di 3 GB Ladang JASTEB</li>
+                            <li class="detail-benefit-item">Admin di Saluran JASTEB</li>
+                        </ul>
+                    </div>
+                    <button class="buy-btn" onclick="openBuyModal('FOUNDER JASTEB')">BELI SEKARANG</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-detail" id="team-pribadi-detail">
+            <div class="container">
+                <div class="card">
+                    <button class="back-btn" onclick="closeProductDetail('team-pribadi')">
+                        <i class="fas fa-arrow-left"></i> Kembali
+                    </button>
+                    <div class="detail-header">
+                        <div class="detail-title">TEAM PRIBADI</div>
+                        <div class="detail-price">Rp 140.000</div>
+                    </div>
+                    <div class="detail-description">
+                        Paket gacor dengan semua benefit dan jaminan balmod. Dapatkan akses penuh ke semua fitur dan bonus eksklusif.
+                    </div>
+                    <div class="detail-benefits">
+                        <div class="detail-benefit-title">Keuntungan Bergabung:</div>
+                        <ul class="detail-benefit-list">
+                            <li class="detail-benefit-item">Bisa OPEN ALL BENEFIT DI ATAS</li>
+                            <li class="detail-benefit-item">Admin di Semua GB Ladang JASTEB</li>
+                            <li class="detail-benefit-item">Dapat WHM MINI</li>
+                            <li class="detail-benefit-item">Dapat SMTP MINI</li>
+                            <li class="detail-benefit-item">Dapat IMPLUSE (Kalo Ada)</li>
+                            <li class="detail-benefit-item">JAMIN BALMOD</li>
+                        </ul>
+                    </div>
+                    <button class="buy-btn" onclick="openBuyModal('TEAM PRIBADI')">BELI SEKARANG</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <button class="nav-btn active" id="productsNavBtn" onclick="showPage('productsPage')">
+                <i class="fas fa-box"></i>
+                <span>Produk</span>
+            </button>
+            <button class="nav-btn" id="paymentNavBtn" onclick="showPage('paymentPage')">
+                <i class="fas fa-credit-card"></i>
+                <span>Payment</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Payment Modals -->
+    <div id="modal-dana" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('dana')">&times;</button>
+            <div class="modal-header">
+                <h2>DANA</h2>
+            </div>
+            <div class="payment-info">
+                <p style="color: var(--text-muted); font-size: 16px;">Nomor DANA</p>
+                <div class="payment-number" id="dana-number">081379497540</div>
+                <button class="copy-btn" onclick="copyToClipboard('081379497540')">Salin Nomor</button>
+            </div>
+            <p class="info-text">Silakan transfer ke nomor DANA di atas</p>
+        </div>
+    </div>
+
+    <div id="modal-qris" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('qris')">&times;</button>
+            <div class="modal-header">
+                <h2>QRIS</h2>
+            </div>
+            <div class="payment-info">
+                <p style="color: var(--text-muted); font-size: 16px;">Scan QR Code</p>
+                <img src="https://files.catbox.moe/59a4wr.jpg" alt="QRIS Code" class="qris-image">
+            </div>
+            <p class="info-text">Scan QR Code menggunakan aplikasi pembayaran Anda</p>
+        </div>
+    </div>
+
+    <div id="modal-gopay" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('gopay')">&times;</button>
+            <div class="modal-header">
+                <h2>GoPay</h2>
+            </div>
+            <div class="payment-info">
+                <p style="color: var(--text-muted); font-size: 16px;">Nomor GoPay</p>
+                <div class="payment-number" id="gopay-number">081379497540</div>
+                <button class="copy-btn" onclick="copyToClipboard('081379497540')">Salin Nomor</button>
+            </div>
+            <p class="info-text">Silakan transfer ke nomor GoPay di atas</p>
+        </div>
+    </div>
+
+    <!-- Unavailable Modal -->
+    <div id="modal-unavailable" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('unavailable')">&times;</button>
+            <div class="modal-header">
+                <h2 id="unavailable-title">Pembayaran</h2>
+            </div>
+            <div class="payment-info">
+                <p class="unavailable-message">Metode pembayaran belum tersedia</p>
+            </div>
+            <p class="info-text">Silakan gunakan metode pembayaran lain</p>
+        </div>
+    </div>
+
+    <!-- Buy Modal -->
+    <div id="modal-buy" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('buy')">&times;</button>
+            <div class="modal-header">
+                <h2 id="buy-product-title">Beli Produk</h2>
+            </div>
+            <div class="payment-info">
+                <p style="color: var(--text-muted); font-size: 16px;">Pilih metode kontak:</p>
+                <div class="buy-options">
+                    <button class="buy-option whatsapp" onclick="contactWhatsApp()">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp</span>
+                    </button>
+                    <button class="buy-option telegram" onclick="contactTelegram()">
+                        <i class="fab fa-telegram"></i>
+                        <span>Telegram</span>
+                    </button>
+                </div>
+            </div>
+            <p class="info-text">Pilih salah satu metode di atas untuk melanjutkan pembelian</p>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentProduct = '';
+        let isMusicPlaying = false;
+        const audio = document.getElementById('backgroundMusic');
+        const musicPlayer = document.getElementById('musicPlayer');
+
+        // Initialize the website
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show enter button after loading
+            setTimeout(function() {
+                document.getElementById('enterBtn').style.display = 'block';
+            }, 1500);
+
+            // Add click event to start music on any click
+            document.addEventListener('click', function() {
+                if (!isMusicPlaying) {
+                    audio.play().catch(e => console.log('Autoplay prevented:', e));
+                    isMusicPlaying = true;
+                    musicPlayer.classList.add('playing');
+                    musicPlayer.querySelector('i').className = 'fas fa-pause';
+                }
+            });
+
+            // Music player toggle
+            musicPlayer.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (isMusicPlaying) {
+                    audio.pause();
+                    musicPlayer.classList.remove('playing');
+                    musicPlayer.querySelector('i').className = 'fas fa-play';
+                } else {
+                    audio.play();
+                    musicPlayer.classList.add('playing');
+                    musicPlayer.querySelector('i').className = 'fas fa-pause';
+                }
+                isMusicPlaying = !isMusicPlaying;
+            });
+        });
+
+        // Enter the website
+        function enterWebsite() {
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'flex';
+            document.getElementById('musicPlayer').style.display = 'flex';
+            showPage('productsPage');
+        }
+
+        // Show specific page
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Hide all product details
+            document.querySelectorAll('.product-detail').forEach(detail => {
+                detail.style.display = 'none';
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update navigation buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            if (pageId === 'productsPage') {
+                document.getElementById('productsNavBtn').classList.add('active');
+            } else if (pageId === 'paymentPage') {
+                document.getElementById('paymentNavBtn').classList.add('active');
+            }
+        }
+
+        // Open product detail
+        function openProductDetail(productId) {
+            // Hide all pages and product details
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.querySelectorAll('.product-detail').forEach(detail => {
+                detail.style.display = 'none';
+            });
+            
+            // Show product detail
+            document.getElementById(productId + '-detail').style.display = 'block';
+            currentProduct = productId;
+        }
+
+        // Close product detail
+        function closeProductDetail(productId) {
+            document.getElementById(productId + '-detail').style.display = 'none';
+            showPage('productsPage');
+        }
+
+        // Open payment modal
+        function openModal(type) {
+            if (type === 'dana') {
+                document.getElementById('modal-dana').classList.add('active');
+            } else if (type === 'qris') {
+                document.getElementById('modal-qris').classList.add('active');
+            } else if (type === 'gopay') {
+                document.getElementById('modal-gopay').classList.add('active');
+            } else {
+                const titles = {
+                    'ovo': 'OVO',
+                    'shopee': 'ShopeePay'
+                };
+                document.getElementById('unavailable-title').textContent = titles[type];
+                document.getElementById('modal-unavailable').classList.add('active');
+            }
+        }
+
+        // Close modal
+        function closeModal(type) {
+            if (type === 'dana') {
+                document.getElementById('modal-dana').classList.remove('active');
+            } else if (type === 'qris') {
+                document.getElementById('modal-qris').classList.remove('active');
+            } else if (type === 'gopay') {
+                document.getElementById('modal-gopay').classList.remove('active');
+            } else if (type === 'buy') {
+                document.getElementById('modal-buy').classList.remove('active');
+            } else {
+                document.getElementById('modal-unavailable').classList.remove('active');
+            }
+        }
+
+        // Open buy modal
+        function openBuyModal(productName) {
+            document.getElementById('buy-product-title').textContent = 'Beli ' + productName;
+            document.getElementById('modal-buy').classList.add('active');
+        }
+
+        // Copy to clipboard
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = 'Tersalin!';
+                btn.style.background = 'linear-gradient(135deg, #27ae60 0%, #229954 100%)';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = 'linear-gradient(135deg, var(--accent) 0%, #357abd 100%)';
+                }, 2000);
+            });
+        }
+
+        // Contact via WhatsApp
+        function contactWhatsApp() {
+            const productNames = {
+                'pt-jasteb': 'PT JASTEB',
+                'team-jasteb': 'TEAM JASTEB',
+                'marga-jasteb': 'MARGA JASTEB',
+                'founder-jasteb': 'FOUNDER JASTEB',
+                'team-pribadi': 'TEAM PRIBADI'
+            };
+            
+            const productName = productNames[currentProduct];
+            const message = `bang mau join ${productName}`;
+            const encodedMessage = encodeURIComponent(message);
+            const phoneNumber = '6285371034299';
+            
+            window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
+            closeModal('buy');
+        }
+
+        // Contact via Telegram
+        function contactTelegram() {
+            const productNames = {
+                'pt-jasteb': 'PT JASTEB',
+                'team-jasteb': 'TEAM JASTEB',
+                'marga-jasteb': 'MARGA JASTEB',
+                'founder-jasteb': 'FOUNDER JASTEB',
+                'team-pribadi': 'TEAM PRIBADI'
+            };
+            
+            const productName = productNames[currentProduct];
+            const message = `bang mau join ${productName}`;
+            const encodedMessage = encodeURIComponent(message);
+            const username = 'Hanzz41STORE';
+            
+            window.open(`https://t.me/${username}?text=${encodedMessage}`, '_blank');
+            closeModal('buy');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>
